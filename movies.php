@@ -66,14 +66,13 @@ if ($stmt) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movies - Online Movie Ticket Booking</title>
     <link rel="stylesheet" href="style/styles.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <?php include('includes/header.php'); ?>
 
     <div class="browse-hero py-5 bg-dark text-white">
         <div class="container">
-            <small class="text-uppercase text-muted">Movie browsing</small>
+            <small class="text-uppercase ">Movie browsing</small>
             <h1 class="display-4 font-weight-bold">Browse Available Movies</h1>
             <p class="lead text-light">Search by title or genre, and filter by city or cinema to find the best show for you.</p>
         </div>
@@ -82,33 +81,43 @@ if ($stmt) {
     <div class="container my-5">
         <div class="browse-filters card shadow-sm mb-4">
             <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Filter Movies</h2>
+                    </div>
+                </div>
                 <form method="GET" class="form-row align-items-end">
-                    <div class="col-md-4 mb-3">
-                        <label for="search" class="font-weight-bold">Search title or genre</label>
-                        <input id="search" type="search" name="search" value="<?php echo htmlspecialchars($search); ?>" class="form-control" placeholder="Search movies, genres...">
+                   <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="search">Search</label>
+                                <input type="text" name="search" id="search" class="form-control" placeholder="Search by title or genre" value="<?php echo htmlspecialchars($search); ?>">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="city">City</label>
+                                <select name="city" id="city" class="form-control">
+                                    <option value="">All Cities</option>
+                                    <?php foreach ($cities as $c): ?>
+                                        <option value="<?php echo htmlspecialchars($c['city']); ?>" <?php echo $c['city'] === $city ? 'selected' : ''; ?>><?php echo htmlspecialchars($c['city']); ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="cinema">Cinema</label>
+                                <select name="cinema" id="cinema" class="form-control">
+                                    <option value="">All Cinemas</option>
+                                    <?php foreach ($cinemas as $c): ?>
+                                        <option value="<?php echo htmlspecialchars($c['cinema_name']); ?>" <?php echo $c['cinema_name'] === $cinema ? 'selected' : ''; ?>><?php echo htmlspecialchars($c['cinema_name']); ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="col-md-2 mb-3 d-grid">
+                                <button type="submit" class="btn btn-primary btn-block">Apply Filters</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="city" class="font-weight-bold">City</label>
-                        <select id="city" name="city" class="form-control">
-                            <option value="">All cities</option>
-                            <?php foreach ($cities as $item): ?>
-                                <option value="<?php echo htmlspecialchars($item['city']); ?>" <?php echo $city === $item['city'] ? 'selected' : ''; ?>><?php echo htmlspecialchars($item['city']); ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="cinema" class="font-weight-bold">Cinema</label>
-                        <select id="cinema" name="cinema" class="form-control">
-                            <option value="">All cinemas</option>
-                            <?php foreach ($cinemas as $item): ?>
-                                <option value="<?php echo htmlspecialchars($item['cinema_name']); ?>" <?php echo $cinema === $item['cinema_name'] ? 'selected' : ''; ?>><?php echo htmlspecialchars($item['cinema_name']); ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <div class="col-md-2 mb-3 d-flex">
-                        <button type="submit" class="btn btn-primary btn-block mr-2">Filter</button>
-                        <a href="movies.php" class="btn btn-outline-secondary btn-block">Reset</a>
-                    </div>
+                   </div>
                 </form>
             </div>
         </div>

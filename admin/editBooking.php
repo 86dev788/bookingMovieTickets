@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style/styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>update</title>
 </head>
 
@@ -85,18 +84,20 @@ if (!$data) {
                     <div class="booking-form-container">
                         <form method="POST">
                             <input type="hidden" name="customer_id" value="<?php echo htmlspecialchars($data['customer_id']); ?>">
-                            <input type="text" name="name" value="<?php echo htmlspecialchars($data['customer_name']); ?>" placeholder="Customer Name" required>
-                            <input type="email" name="email" value="<?php echo htmlspecialchars($data['email']); ?>" placeholder="Customer Email" required>
-                            <input type="text" name="phone" value="<?php echo htmlspecialchars($data['phone']); ?>" placeholder="Customer Phone" required>
-                            <input type="text" value="<?php echo htmlspecialchars($data['movie_title']); ?>" disabled>
-                            <input type="text" value="<?php echo htmlspecialchars(date('d M Y H:i', strtotime($data['show_time']))); ?>" disabled>
-                            <input type="number" step="0.01" name="amount" value="<?php echo htmlspecialchars($data['total_amount']); ?>" placeholder="Enter Amount" required>
-                            <select name="status" required>
-                                <option value="Pending" <?php echo $data['status'] === 'Pending' ? 'selected' : ''; ?>>Pending</option>
-                                <option value="Confirmed" <?php echo $data['status'] === 'Confirmed' ? 'selected' : ''; ?>>Confirmed</option>
-                                <option value="Cancelled" <?php echo $data['status'] === 'Cancelled' ? 'selected' : ''; ?>>Cancelled</option>
-                            </select>
-                            <input type="submit" name="update" class="form-btn" value="Update">
+                            <div class="mb-3"><input class="form-control" type="text" name="name" value="<?php echo htmlspecialchars($data['customer_name']); ?>" placeholder="Customer Name" required></div>
+                            <div class="mb-3"><input class="form-control" type="email" name="email" value="<?php echo htmlspecialchars($data['email']); ?>" placeholder="Customer Email" required></div>
+                            <div class="mb-3"><input class="form-control" type="text" name="phone" value="<?php echo htmlspecialchars($data['phone']); ?>" placeholder="Customer Phone" required></div>
+                            <div class="mb-3"><input class="form-control" type="text" value="<?php echo htmlspecialchars($data['movie_title']); ?>" disabled></div>
+                            <div class="mb-3"><input class="form-control" type="text" value="<?php echo htmlspecialchars(date('d M Y H:i', strtotime($data['show_time']))); ?>" disabled></div>
+                            <div class="mb-3"><input class="form-control" type="number" step="0.01" name="amount" value="<?php echo htmlspecialchars($data['total_amount']); ?>" placeholder="Enter Amount" required></div>
+                            <div class="mb-3">
+                                <select name="status" class="form-select" required>
+                                    <option value="Pending" <?php echo $data['status'] === 'Pending' ? 'selected' : ''; ?>>Pending</option>
+                                    <option value="Confirmed" <?php echo $data['status'] === 'Confirmed' ? 'selected' : ''; ?>>Confirmed</option>
+                                    <option value="Cancelled" <?php echo $data['status'] === 'Cancelled' ? 'selected' : ''; ?>>Cancelled</option>
+                                </select>
+                            </div>
+                            <input type="submit" name="update" class="btn btn-primary" value="Update">
                         </form>
                     </div>
                 </div>

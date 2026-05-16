@@ -33,20 +33,21 @@
 <head>
 <title>Transaction status query</title>
 <meta name="GENERATOR" content="Evrsoft First Page">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 	<h2>Transaction status query</h2>
-	<form method="post" action="">
-		<table border="1">
+	<form method="post" action="" class="mb-3">
+		<table class="table table-bordered w-50">
 			<tbody>
 				<tr>
 					<td><label>ORDER_ID::*</label></td>
-					<td><input id="ORDER_ID" tabindex="1" maxlength="20" size="20" name="ORDER_ID" autocomplete="off" value="<?php echo $ORDER_ID ?>">
+					<td><input id="ORDER_ID" tabindex="1" maxlength="20" size="20" name="ORDER_ID" autocomplete="off" value="<?php echo $ORDER_ID ?>" class="form-control">
 					</td>
 				</tr>
 				<tr>
 					<td></td>
-					<td><input value="Status Query" type="submit"	onclick=""></td>
+					<td><input value="Status Query" type="submit" class="btn btn-primary" onclick=""></td>
 				</tr>
 			</tbody>
 		</table>

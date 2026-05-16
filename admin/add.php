@@ -37,7 +37,6 @@ if ($showResult = mysqli_query($con, $showQuery)) {
     <link rel="icon" type="image/png" href="../img/logo.png">
     <link rel="stylesheet" href="../style/styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
 <body>
@@ -53,22 +52,24 @@ if ($showResult = mysqli_query($con, $showQuery)) {
                     </div>
                     <div class="booking-form-container">
                         <form action="spot.php" method="POST">
-                            <select name="show_id" required>
-                                <option value="" disabled selected>SELECT SHOW</option>
-                                <?php foreach ($showOptions as $show): ?>
-                                    <option value="<?php echo $show['show_id']; ?>">
-                                        <?php echo htmlspecialchars($show['movie_title'] . ' - ' . $show['cinema_name'] . ' / ' . $show['screen_name'] . ' @ ' . date('d M Y H:i', strtotime($show['show_time'])) . ' (PKR ' . number_format($show['price'], 2) . ')'); ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
+                            <div class="mb-3">
+                                <select name="show_id" class="form-select" required>
+                                    <option value="" disabled selected>SELECT SHOW</option>
+                                    <?php foreach ($showOptions as $show): ?>
+                                        <option value="<?php echo $show['show_id']; ?>">
+                                            <?php echo htmlspecialchars($show['movie_title'] . ' - ' . $show['cinema_name'] . ' / ' . $show['screen_name'] . ' @ ' . date('d M Y H:i', strtotime($show['show_time'])) . ' (PKR ' . number_format($show['price'], 2) . ')'); ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
 
-                            <input placeholder="First Name" type="text" name="fName" required>
-                            <input placeholder="Last Name" type="text" name="lName">
-                            <input placeholder="Phone Number" type="text" name="pNumber" required>
-                            <input placeholder="Email" type="email" name="email" required>
-                            <input placeholder="Total Amount (leave blank for show price)" type="text" name="amount">
+                            <div class="mb-3"><input class="form-control" placeholder="First Name" type="text" name="fName" required></div>
+                            <div class="mb-3"><input class="form-control" placeholder="Last Name" type="text" name="lName"></div>
+                            <div class="mb-3"><input class="form-control" placeholder="Phone Number" type="text" name="pNumber" required></div>
+                            <div class="mb-3"><input class="form-control" placeholder="Email" type="email" name="email" required></div>
+                            <div class="mb-3"><input class="form-control" placeholder="Total Amount (leave blank for show price)" type="text" name="amount"></div>
 
-                            <button type="submit" value="submit" name="submit" class="form-btn">ADD BOOKING</button>
+                            <button type="submit" value="submit" name="submit" class="btn btn-primary">ADD BOOKING</button>
                         </form>
                     </div>
                 </div>

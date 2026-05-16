@@ -28,7 +28,6 @@ if ($result = mysqli_query($con, $query)) {
     <title>Show Schedule - Admin</title>
     <link rel="icon" type="image/png" href="../img/logo.png">
     <link rel="stylesheet" href="../style/styles.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <?php include('header.php'); ?>

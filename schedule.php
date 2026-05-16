@@ -16,256 +16,56 @@
 
 <body>
     <div class="schedule-section">
-        <h1>Schedule</h1>
+        <h1 class="text-light">Schedule</h1>
         <div class="schedule-dates">
-            <div class="schedule-item">March 10,2019</div>
+            <div class="schedule-item text-dark">March 10,2019</div>
             <div class="schedule-item schedule-item-selected">March 11,2019</div>
-            <div class="schedule-item">March 12,2019</div>
-            <div class="schedule-item">March 13,2019</div>
-            <div class="schedule-item">March 14,2019</div>
+            <div class="schedule-item text-dark">March 12,2019</div>
+            <div class="schedule-item text-dark">March 13,2019</div>
+            <div class="schedule-item text-dark">March 14,2019</div>
         </div>
         <div class="schedule-table">
             <table>
                 <tr>
-                    <th>SHOW</th>
-                    <th>SCHEDULE IN CINEMA</th>
+                    <th class="text-dark">SHOW</th>
+                    <th class="text-dark">SCHEDULE IN CINEMA</th>
                 </tr>
                 <tr class="fade-scroll">
                     <td>
-                        <h2>Captain Marvel</h2>
-                        <i class="far fa-clock"></i> 125m <i class="fas fa-desktop"></i> IMAX
-                        <h3>SYNOPSIS</h3>
-                        <p>Ethan and team take on their most impossible mission yet, eradicating the Syndicate - an International rogue organization
+                        <h2 class="text-light">Captain Marvel</h2>
+                        <i class="far fa-clock text-light"></i> <span class="text-light">125m</span> <i class="text-light fas fa-desktop"></i> <span class="text-light">IMAX</span>
+                        <h3 class="text-light">SYNOPSIS</h3>
+                        <p class="text-light">Ethan and team take on their most impossible mission yet, eradicating the Syndicate - an International rogue organization
                         </p>
-                        <div class="schedule-item"> DETAILS</a>
+                        <div class="schedule-item btn btn-primary"> DETAILS</a>
                         </div>
                     </td>
                     <td>
                         <div class="hall-type">
-                            <h3>Private Hall</h3>
+                            <h3 class="text-light">Private Hall</h3>
                             <div>
-                                <div class="schedule-item"><i class="far fa-clock"></i></div>
-                                <div class="schedule-item">09:00 AM</div>
-                                <div class="schedule-item">1:00 PM</div>
-                                <div class="schedule-item">06:00 PM</div>
+                                <div class="schedule-item text-dark"><i class="far fa-clock"></i></div>
+                                <div class="schedule-item text-dark">09:00 AM</div>
+                                <div class="schedule-item text-dark">1:00 PM</div>
+                                <div class="schedule-item text-dark">06:00 PM</div>
                             </div>
                         </div>
                         <div class="hall-type">
-                            <h3>VIP Hall</h3>
+                            <h3 class="text-light">VIP Hall</h3>
                             <div>
-                                <div class="schedule-item"><i class="far fa-clock"></i></div>
-                                <div class="schedule-item">09:00 AM</div>
-                                <div class="schedule-item">1:00 PM</div>
-                                <div class="schedule-item">6:00 PM</div>
+                                <div class="schedule-item text-dark"><i class="far fa-clock"></i></div>
+                                <div class="schedule-item text-dark">09:00 AM</div>
+                                <div class="schedule-item text-dark">1:00 PM</div>
+                                <div class="schedule-item text-dark">6:00 PM</div>
                             </div>
                         </div>
                         <div class="hall-type">
-                            <h3>Main Hall</h3>
+                            <h3 class="text-light">Main Hall</h3>
                             <div>
-                                <div class="schedule-item"><i class="far fa-clock"></i></div>
-                                <div class="schedule-item">09:00 AM</div>
-                                <div class="schedule-item">1:00 AM</div>
-                                <div class="schedule-item">06:00 PM</div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="fade-scroll">
-                    <td>
-                        <h2>Captain Marvel</h2>
-                        <i class="far fa-clock"></i> 125m <i class="fas fa-desktop"></i> IMAX
-                        <h3>SYNOPSIS</h3>
-                        <p>Ethan and team take on their most impossible mission yet, eradicating the Syndicate - an International rogue organization
-                        </p>
-                        <div class="schedule-item"> DETAILS</a>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="hall-type">
-                            <h3>Private Hall</h3>
-                            <div>
-                                <div class="schedule-item"><i class="far fa-clock"></i></div>
-                                <div class="schedule-item">09:00 AM</div>
-                                <div class="schedule-item">11:30 AM</div>
-                                <div class="schedule-item">06:00 PM</div>
-                            </div>
-                        </div>
-                        <div class="hall-type">
-                            <h3>VIP Hall</h3>
-                            <div>
-                                <div class="schedule-item"><i class="far fa-clock"></i></div>
-                                <div class="schedule-item">09:00 AM</div>
-                                <div class="schedule-item">11:30 AM</div>
-                                <div class="schedule-item">06:00 PM</div>
-                            </div>
-                        </div>
-                        <div class="hall-type">
-                            <h3>Main Hall</h3>
-                            <div>
-                                <div class="schedule-item"><i class="far fa-clock"></i></div>
-                                <div class="schedule-item">09:00 AM</div>
-                                <div class="schedule-item">11:30 AM</div>
-                                <div class="schedule-item">06:00 PM</div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="fade-scroll">
-                    <td>
-                        <h2>Captain Marvel</h2>
-                        <i class="far fa-clock"></i> 125m <i class="fas fa-desktop"></i> IMAX
-                        <h3>SYNOPSIS</h3>
-                        <p>Ethan and team take on their most impossible mission yet, eradicating the Syndicate - an International rogue organization
-                        </p>
-                        <div class="schedule-item"> DETAILS</a>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="hall-type">
-                            <h3>Private Hall</h3>
-                            <div>
-                                <div class="schedule-item"><i class="far fa-clock"></i></div>
-                                <div class="schedule-item">09:00 AM</div>
-                                <div class="schedule-item">11:30 AM</div>
-                                <div class="schedule-item">06:00 PM</div>
-                            </div>
-                        </div>
-                        <div class="hall-type">
-                            <h3>VIP Hall</h3>
-                            <div>
-                                <div class="schedule-item"><i class="far fa-clock"></i></div>
-                                <div class="schedule-item">09:00 AM</div>
-                                <div class="schedule-item">11:30 AM</div>
-                                <div class="schedule-item">06:00 PM</div>
-                            </div>
-                        </div>
-                        <div class="hall-type">
-                            <h3>Main Hall</h3>
-                            <div>
-                                <div class="schedule-item"><i class="far fa-clock"></i></div>
-                                <div class="schedule-item">09:00 AM</div>
-                                <div class="schedule-item">11:30 AM</div>
-                                <div class="schedule-item">06:00 PM</div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="fade-scroll">
-                    <td>
-                        <h2>Captain Marvel</h2>
-                        <i class="far fa-clock"></i> 125m <i class="fas fa-desktop"></i> IMAX
-                        <h3>SYNOPSIS</h3>
-                        <p>Ethan and team take on their most impossible mission yet, eradicating the Syndicate - an International rogue organization
-                        </p>
-                        <div class="schedule-item"> DETAILS</a>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="hall-type">
-                            <h3>Private Hall</h3>
-                            <div>
-                                <div class="schedule-item"><i class="far fa-clock"></i></div>
-                                <div class="schedule-item">09:00 AM</div>
-                                <div class="schedule-item">11:30 AM</div>
-                                <div class="schedule-item">06:00 PM</div>
-                            </div>
-                        </div>
-                        <div class="hall-type">
-                            <h3>VIP Hall</h3>
-                            <div>
-                                <div class="schedule-item"><i class="far fa-clock"></i></div>
-                                <div class="schedule-item">09:00 AM</div>
-                                <div class="schedule-item">11:30 AM</div>
-                                <div class="schedule-item">06:00 PM</div>
-                            </div>
-                        </div>
-                        <div class="hall-type">
-                            <h3>Main Hall</h3>
-                            <div>
-                                <div class="schedule-item"><i class="far fa-clock"></i></div>
-                                <div class="schedule-item">09:00 AM</div>
-                                <div class="schedule-item">11:30 AM</div>
-                                <div class="schedule-item">06:00 PM</div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="fade-scroll">
-                    <td>
-                        <h2>Captain Marvel</h2>
-                        <i class="far fa-clock"></i> 125m <i class="fas fa-desktop"></i> IMAX
-                        <h3>SYNOPSIS</h3>
-                        <p>Ethan and team take on their most impossible mission yet, eradicating the Syndicate - an International rogue organization
-                        </p>
-                        <div class="schedule-item"> DETAILS</a>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="hall-type">
-                            <h3>Private Hall</h3>
-                            <div>
-                                <div class="schedule-item"><i class="far fa-clock"></i></div>
-                                <div class="schedule-item">09:00 AM</div>
-                                <div class="schedule-item">11:30 AM</div>
-                                <div class="schedule-item">06:00 PM</div>
-                            </div>
-                        </div>
-                        <div class="hall-type">
-                            <h3>VIP Hall</h3>
-                            <div>
-                                <div class="schedule-item"><i class="far fa-clock"></i></div>
-                                <div class="schedule-item">09:00 AM</div>
-                                <div class="schedule-item">11:30 AM</div>
-                                <div class="schedule-item">06:00 PM</div>
-                            </div>
-                        </div>
-                        <div class="hall-type">
-                            <h3>Main Hall</h3>
-                            <div>
-                                <div class="schedule-item"><i class="far fa-clock"></i></div>
-                                <div class="schedule-item">09:00 AM</div>
-                                <div class="schedule-item">11:30 AM</div>
-                                <div class="schedule-item">06:00 PM</div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="fade-scroll">
-                    <td>
-                        <h2>Captain Marvel</h2>
-                        <i class="far fa-clock"></i> 125m <i class="fas fa-desktop"></i> IMAX
-                        <h3>SYNOPSIS</h3>
-                        <p>Ethan and team take on their most impossible mission yet, eradicating the Syndicate - an International rogue organization
-                        </p>
-                        <div class="schedule-item"> DETAILS</a>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="hall-type">
-                            <h3>Private Hall</h3>
-                            <div>
-                                <div class="schedule-item"><i class="far fa-clock"></i></div>
-                                <div class="schedule-item">09:00 AM</div>
-                                <div class="schedule-item">11:30 AM</div>
-                                <div class="schedule-item">06:00 PM</div>
-                            </div>
-                        </div>
-                        <div class="hall-type">
-                            <h3>VIP Hall</h3>
-                            <div>
-                                <div class="schedule-item"><i class="far fa-clock"></i></div>
-                                <div class="schedule-item">09:00 AM</div>
-                                <div class="schedule-item">11:30 AM</div>
-                                <div class="schedule-item">06:00 PM</div>
-                            </div>
-                        </div>
-                        <div class="hall-type">
-                            <h3>Main Hall</h3>
-                            <div>
-                                <div class="schedule-item"><i class="far fa-clock"></i></div>
-                                <div class="schedule-item">09:00 AM</div>
-                                <div class="schedule-item">11:30 AM</div>
-                                <div class="schedule-item">06:00 PM</div>
+                                <div class="schedule-item text-dark"><i class="far fa-clock"></i></div>
+                                <div class="schedule-item text-dark">09:00 AM</div>
+                                <div class="schedule-item text-dark">1:00 PM</div>
+                                <div class="schedule-item text-dark">06:00 PM</div>
                             </div>
                         </div>
                     </td>

@@ -16,6 +16,23 @@
   --bs-secondary-border: rgba(255,255,255,0.12);
 }
 
+/* Ensure headings use site text color by default (dark-background areas will show white)
+   Specific card/section headings override this where a dark color is needed on light backgrounds */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text);
+}
+
+/* Keep admin panel section headers visible on dark admin panels */
+.admin-panel-section-header > h2 {
+  color: var(--text);
+}
+
+/* Movie form/card titles should remain dark (they sit on white cards) */
+.movie-form .card-title,
+.movie-card-title {
+  color: #141b39;
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 * {
@@ -30,9 +47,10 @@ body {
   margin: 0;
   font-family: 'Inter', sans-serif;
   color: var(--text);
-  background: radial-gradient(circle at top, rgba(48, 72, 156, 0.18), transparent 40%),
+  background: linear-gradient(135deg, #111827, #1f2937);  
+  /* background: radial-gradient(circle at top, rgba(48, 72, 156, 0.18), transparent 40%),
               radial-gradient(circle at 20% 10%, rgba(96, 164, 255, 0.12), transparent 25%),
-              linear-gradient(180deg, #070a17 0%, #02030a 100%);
+              linear-gradient(180deg, #070a17 0%, #02030a 100%); */
 }
 
 a {
@@ -61,7 +79,7 @@ HEADER
 
     z-index: 1000;
 
-    background: #0b1020;
+    background: linear-gradient(135deg, #111827, #1f2937);;
 
     border-bottom: 1px solid rgba(255,255,255,0.08);
 
@@ -181,69 +199,81 @@ RESPONSIVE
 }
 /* Footer Styling */
 
-footer {
-  display: grid;
-  grid-gap: 5px;
-  padding: 24px 10%;
-  background: rgba(7, 10, 23, 0.96);
-  color: var(--text);
-  border-top: 1px solid rgba(255,255,255,0.08);
-  bottom: 0;
-  width: 100%;
-  margin-top: 40px;
-}
-.footer-brand {
-  overflow: hidden;
+/* Make footer stay at bottom */
+
+/* Footer Styling */
+.footer {
+    background: linear-gradient(135deg, #111827, #1f2937);
+    color: #fff;
+    padding: 30px 10%;
+    margin-top: auto;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.3);
 }
 
-.footer-brand:before {
-  content: "";
-  display: block;
-  position: relative;
-  background: linear-gradient(135deg, rgba(93, 131, 255, 0.20), rgba(244, 178, 75, 0.18));
-  box-shadow: 0px 8px 0px rgba(3, 12, 35, 0.25);
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-.footer-brand .footer-heading {
-  position: relative;
-  top: 1vmax;
-  left: 1vmax;
-  padding: 0;
-  margin: 0;
-  color: #eef2ff;
-  font-size: 5em;
-  font-family: "Lobster", cursive;
-  text-shadow: 0 0 24px rgba(93, 131, 255, 0.35);
+.footer-brand h2 {
+    margin: 0;
+    font-size: 28px;
+    color: #fbbf24;
 }
 
-.footer-section {
-  text-align: left;
-  padding: 20px;
-  width: 100%;
+.footer-brand p {
+    margin-top: 8px;
+    color: #cbd5e1;
+    font-size: 14px;
 }
 
-.footer-section-inner-container {
-  margin: 15px 0;
-  padding: 25px;
-  width: 100%;
-  background: rgba(16, 21, 45, 0.95);
-  text-align: justify;
-  border-radius: 18px;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--border);
+.footer-links {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
-.footer-section-inner-container > span {
-  margin: 10px 0;
-  color: var(--muted);
+.footer-links a {
+    color: #e5e7eb;
+    text-decoration: none;
+    transition: 0.3s ease;
+    font-size: 15px;
+}
+
+.footer-links a:hover {
+    color: #fbbf24;
+}
+
+.footer-bottom {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    text-align: center;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-links {
+        justify-content: center;
+    }
 }
 
 /* Movie Section Styling */
 
 .movie-show-container {
   margin-top: 0;
-  padding: 0 10%;
+  padding: 0 0;
 }
 
 .movie-show-container > h1 {
@@ -455,6 +485,25 @@ footer {
   flex-direction: column;
 }
 
+/* Ensure elements with white backgrounds use dark text for contrast */
+.card,
+.movie-card,
+.movie-card-body,
+.movie-detail-card,
+.movie-form .card,
+.movie-form .card-body,
+.booking-form-container,
+.footer-section-inner-container {
+  background: #fff !important;
+  color: #141b39 !important;
+}
+
+/* Make sure badges inside white movie cards have distinct colored backgrounds */
+.movie-card .badge-primary { background-color: var(--primary) !important; color: #fff !important; }
+.movie-card .badge-secondary { background-color: #6c757d !important; color: #fff !important; }
+.movie-card .badge-info { background-color: #17a2b8 !important; color: #fff !important; }
+.movie-card .badge { padding: 0.35em 0.6em; border-radius: 999px; }
+
 .movie-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 22px 50px rgba(15, 23, 60, 0.12);
@@ -512,6 +561,22 @@ footer {
   border-radius: 0.75rem;
   padding: 0.85rem 1rem;
   margin-top: auto;
+}
+
+/* Ensure dark background areas force white text for readability */
+.bg-dark,
+.browse-hero,
+.admin-section1,
+.seat-map,
+.booking-panel,
+.footer {
+  color: var(--text) !important;
+}
+
+/* Admin panels contain white backgrounds; ensure their text remains dark */
+.admin-section-panel,
+.admin-section-panel * {
+  color: #141b39 !important;
 }
 
 .movie-detail-page {
@@ -582,12 +647,12 @@ footer {
 
 .trailers-section > h1,
 .trailers-section > h3 {
-  padding: 0 10%;
+  padding: 0 0;
 }
 
 .trailers-section > h1 {
   text-align: left;
-  color: #6e5a11;
+  color: #fff;
 }
 
 .trailers-section > h3 {
@@ -600,7 +665,7 @@ footer {
   display: block;
   height: 3px;
   width: 7%;
-  background: #6e5a11;
+  background: #fff;
   position: relative;
   bottom: -10px;
 }
@@ -613,10 +678,13 @@ footer {
 }
 
 .trailers-grid-item {
+  margin-right: 10px;
+  padding-bottom: 10px;
   font-size: 30px;
   text-align: center;
   overflow: hidden;
-  width: 100%;
+  border-radius: 20px;
+  width: 97%;
   height: 100%;
   position: relative;
   vertical-align: middle;
@@ -670,12 +738,12 @@ footer {
 /* Services Section Styling */
 
 .services-section {
-  padding: 0 10%;
+  padding: 0 0;
   text-align: center;
 }
 
 .services-section > h1 {
-  color: #6e5a11;
+  color: #fff;
   text-align: left;
   padding: 0 0 10px 0;
 }
@@ -691,7 +759,7 @@ footer {
   display: block;
   height: 3px;
   width: 7%;
-  background: #6e5a11;
+  background: #fff;
   position: relative;
   bottom: -10px;
 }
@@ -704,7 +772,7 @@ footer {
 }
 
 .service-item > h2 {
-  color: #6e5a11;
+  color: #fff;
   padding: 25px 0;
 }
 
@@ -802,7 +870,7 @@ footer {
 }
 
 .booking-form-container {
-  background-color: #6e5a11;
+  background-color: #fff;
   width: 100%;
   padding: 25px;
   margin: 20px 0;
@@ -876,7 +944,7 @@ footer {
   padding: 0 0 20px 0;
   margin: 0 0 40px 0;
   border-bottom: 1px solid #bdbdbd;
-  color: #6e5a11;
+  color: #fff;
 }
 
 .schedule-dates {
@@ -887,7 +955,7 @@ footer {
 
 .schedule-item {
   padding: 15px;
-  background-color: #6e5a11;
+  background-color: #fff;
   margin-right: 10px;
   color: #fff;
   cursor: pointer;
@@ -896,11 +964,11 @@ footer {
 
 .schedule-item:hover {
   background-color: #b6b6b6;
-  color: #6e5a11;
+  color: #fff;
 }
 
 .schedule-item-selected {
-  color: #6e5a11;
+  color: #fff;
   background-color: #b6b6b6;
   cursor: auto;
 }
@@ -912,7 +980,7 @@ footer {
 
 .schedule-table table tr th {
   padding: 10px 0 10px 40px;
-  background-color: #6e5a11;
+  background-color: #fff;
   border: 1px solid #b6b6b6;
   color: #fff;
 }
@@ -997,11 +1065,11 @@ footer {
 }
 
 .contact-us-section1 form *:not(button) {
-  border: #6e5a11 1px solid;
+  border: #fff 1px solid;
 }
 
 .contact-us-section1 form button {
-  background-color: #6e5a11;
+  background-color: #fff;
   color: #b6b6b6;
   border: none;
   cursor: pointer;
@@ -1012,8 +1080,8 @@ footer {
 }
 
 .contact-us-section2 h3 {
-  color: #4e4e4e;
-  border-bottom: #6e5a11 solid 1px;
+  color: var(--text);
+  border-bottom: #fff solid 1px;
   padding: 10px 0;
   margin-bottom: 10px;
 }
@@ -1038,11 +1106,13 @@ footer {
   display: grid;
   grid-template-columns: 1fr 5fr;
 }
-
+.admin-section-header h2 a {
+  color: #fff;
+  text-decoration: none;
+}
 .admin-user-avatar {
   width: 65px;
 }
-
 .admin-login-info {
   display: flex;
   align-items: center;
@@ -1139,7 +1209,7 @@ footer {
 }
 
 .admin-section1 ul li:hover {
-  background-color: #6e5a11;
+  background-color: #fff;
   color: #fff;
   border-left: #fff 3px solid;
 }
@@ -1167,12 +1237,12 @@ footer {
 }
 
 .admin-section1 ul li.has-submenu:hover .submenu-head {
-  background-color: #6e5a11;
+  background-color: #fff;
   border-left: #fff 3px solid;
 }
 
 .admin-section1 ul li.has-submenu .submenu-head.active {
-  background-color: #6e5a11;
+  background-color: #fff;
   border-left: #fff 3px solid;
 }
 
@@ -1230,7 +1300,7 @@ footer {
 }
 
 .admin-panel-section-header > h2 {
-  color: #6e6e6e;
+  /* color: #6e6e6e; */
 }
 
 .admin-panel-section-header > i {
@@ -1340,52 +1410,53 @@ footer {
 }
 
 .admin-section-panel2 form {
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  align-items: left;
+  display: block;
+  width: 100%;
 }
 
-.admin-section-panel2 form input {
-  border-radius: 4px;
-  border: 1px solid #6e6e6e;
-  padding: 10px;
-  width: 32%;
-  height: 42px;
-  margin: 8px 5px;
+.admin-section-panel2 form input,
+.admin-section-panel2 form textarea,
+.admin-section-panel2 form select {
+  border-radius: 6px;
+  border: 1px solid #d0d4da;
+  padding: 0.6rem 0.75rem;
+  width: 100%;
+  height: auto;
+  margin: 0.5rem 0;
+  box-sizing: border-box;
 }
 
 .admin-section-panel2 form input[type="file"] {
-  width: 59%;
-  padding: 0;
+  width: 100%;
+  padding: 0.4rem 0.6rem;
 }
 
 .admin-section-panel2 form button {
-  border-radius: 4px;
+  border-radius: 8px;
   border: none;
-  padding: 10px;
-  margin: 10px 32px;
-  width: 49%;
+  padding: 0.6rem 1rem;
+  margin: 0.6rem 0;
+  min-width: 140px;
   text-align: center;
-  background-color: #a3861e;
+  background-color: var(--primary);
   color: #fff;
-  transition: all 0.7s ease;
+  transition: all 0.2s ease;
   cursor: pointer;
-  height: 42px;
+  height: auto;
 }
 
 .admin-section-panel2 form button:hover {
-  background-color: #b6b6b6;
+  filter: brightness(0.95);
 }
 
 .admin-section-panel2 form label {
-  border: none;
-  margin-left: 0; 
-  padding: 0px;
-  font-size: 22px;
-  width: 75%;
-  text-align: center;
-  color: #000;
+  display: block;
+  margin: 0.25rem 0 0.5rem 0;
+  padding: 0;
+  font-size: 1rem;
+  width: auto;
+  text-align: left;
+  color: var(--text);
 }
 /* Responsive Properties */
 

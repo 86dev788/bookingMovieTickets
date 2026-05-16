@@ -18,9 +18,8 @@ if (!isset($_SESSION['uname'])) {
     <link rel="icon" type="image/png" href="../img/logo.png">
     <link rel="stylesheet" href="../style/styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Admin-level Bootstrap loaded via includes/header.php when on /admin/ -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
 <body>
@@ -43,33 +42,33 @@ if (!isset($_SESSION['uname'])) {
                 <div class="admin-section-panel admin-section-stats">
                     <div class="admin-section-stats-panel">
                         <i class="fa fa-ticket-alt" style="background-color: #cf4545"></i>
-                        <h2 style="color: #cf4545"><?php echo $bookingsNo ?></h2>
+                        <h2 style="color: #cf4545 !important"><?php echo $bookingsNo ?></h2>
                         <h3>Bookings</h3>
                     </div>
                     <div class="admin-section-stats-panel">
                         <i class="fas fa-film" style="background-color: #4547cf"></i>
-                        <h2 style="color: #4547cf"><?php echo $moviesNo ?></h2>
+                        <h2 style="color: #4547cf !important"><?php echo $moviesNo ?></h2>
                         <h3>Movies</h3>
                     </div>
                     <div class="admin-section-stats-panel">
                         <i class="fas fa-ticket-alt" style="background-color: #f39c12"></i>
-                        <h2 style="color: #f39c12"><?php echo $ticketsNo ?></h2>
+                        <h2 style="color: #f39c12 !important"><?php echo $ticketsNo ?></h2>
                         <h3>Tickets Sold</h3>
                     </div>
                     <div class="admin-section-stats-panel">
                         <i class="fas fa-dollar-sign" style="background-color: #27ae60"></i>
-                        <h2 style="color: #27ae60"><?php echo $paidPaymentsNo ?></h2>
+                        <h2 style="color: #27ae60 !important"><?php echo $paidPaymentsNo ?></h2>
                         <h3>Paid Payments</h3>
                     </div>
                     <div class="admin-section-stats-panel">
                         <i class="fas fa-users" style="background-color: #000000"></i>
                         <!--<i class="fas fa-ticket-alt"></i>-->
-                        <h2 style="color: #bb3c95"><?php echo $userNo ?></h2>
+                        <h2 style="color: #bb3c95 !important"><?php echo $userNo ?></h2>
                         <h3>Users</h3>
                     </div>
                     <div class="admin-section-stats-panel" style="border: none">
                         <i class="fas fa-envelope" style="background-color: #3cbb6c"></i>
-                        <h2 style="color: #3cbb6c"><?php echo $messagesNo ?></h2>
+                        <h2 style="color: #3cbb6c !important"><?php echo $messagesNo ?></h2>
                         <h3>Messages</h3>
                     </div>
                 </div>

@@ -41,14 +41,6 @@
             width: 96%;
             padding: 7px;
         }
-
-        #div_login input[type=submit] {
-            padding: 7px;
-            width: 100px;
-            background-color: lightseagreen;
-            border: 0px;
-            color: white;
-        }
     </style>
 </head>
 
@@ -58,13 +50,13 @@
             <div id="div_login">
                 <h1>Login</h1>
                 <div>
-                    <input type="email" class="textbox" id="txt_email" name="txt_email" placeholder="Email" required />
+                    <input type="email" class="form-control" id="txt_email" name="txt_email" placeholder="Email" required />
                 </div>
                 <div>
-                    <input type="password" class="textbox" id="txt_pwd" name="txt_pwd" placeholder="Password" required />
+                    <input type="password" class="form-control" id="txt_pwd" name="txt_pwd" placeholder="Password" required />
                 </div>
                 <div>
-                    <input type="submit" value="Submit" name="but_submit" id="but_submit" />
+                    <input type="submit" value="Submit" name="but_submit" id="but_submit" class="btn btn-primary" />
                 </div>
             </div>
         </form>

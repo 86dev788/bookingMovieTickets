@@ -47,6 +47,14 @@ while ($row = $tickets_result->fetch_assoc()) {
     $tickets[] = $row;
 }
 $stmt->close();
+
+// Get payment details
+$stmt = $con->prepare("SELECT method, status, paid_at FROM payment WHERE booking_id = ?");
+$stmt->bind_param("i", $booking_id);
+$stmt->execute();
+$payment_result = $stmt->get_result();
+$payment = $payment_result->fetch_assoc();
+$stmt->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,7 +63,6 @@ $stmt->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Confirmation - Online Movie Ticket Booking</title>
     <link rel="stylesheet" href="style/styles.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <?php include('includes/header.php'); ?>
@@ -76,6 +83,10 @@ $stmt->close();
                 <p><strong>Cinema:</strong> <?php echo htmlspecialchars($booking['CinemaName']); ?> (<?php echo htmlspecialchars($booking['City']); ?>)</p>
                 <p><strong>Screen:</strong> <?php echo htmlspecialchars($booking['ScreenName']); ?></p>
                 <p><strong>Total Amount:</strong> PKR <?php echo number_format($booking['TotalAmount'], 2); ?></p>
+                <?php if (!empty($payment)): ?>
+                    <p><strong>Payment Method:</strong> <?php echo htmlspecialchars($payment['method']); ?></p>
+                    <p><strong>Payment Status:</strong> <?php echo htmlspecialchars($payment['status']); ?><?php if (!empty($payment['paid_at'])): ?> (Paid at <?php echo date('d M Y, H:i', strtotime($payment['paid_at'])); ?>)<?php endif; ?></p>
+                <?php endif; ?>
             </div>
         </div>
 
@@ -86,11 +97,15 @@ $stmt->close();
                     <div class="card">
                         <div class="card-body text-center">
                             <h5><?php echo htmlspecialchars($booking['Title']); ?></h5>
-                            <p>Seat: <?php echo htmlspecialchars($ticket['SeatNumber']); ?> (<?php echo htmlspecialchars($ticket['SeatType']); ?>)</p>
+                                            <p>Seat: <?php echo htmlspecialchars($ticket['SeatNumber']); ?> (<?php echo htmlspecialchars($ticket['SeatType']); ?>)</p>
                             <p>Screen: <?php echo htmlspecialchars($booking['ScreenName']); ?></p>
                             <p>Time: <?php echo date('d M Y, H:i', strtotime($booking['ShowTime'])); ?></p>
-                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=<?php echo urlencode($ticket['QRCode']); ?>" alt="QR Code">
-                            <p><small>QR Code: <?php echo htmlspecialchars($ticket['QRCode']); ?></small></p>
+                                            <?php if (!empty($ticket['QRCode']) && !empty($ticket['SeatNumber'])): ?>
+                                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=<?php echo urlencode($ticket['QRCode']); ?>" alt="QR Code">
+                                                <p><small>QR Code: <?php echo htmlspecialchars($ticket['QRCode']); ?></small></p>
+                                            <?php else: ?>
+                                                <p><em>Ticket pending finalization.</em></p>
+                                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

@@ -46,7 +46,6 @@ $stmt->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($movie['title']); ?> - Online Movie Ticket Booking</title>
     <link rel="stylesheet" href="style/styles.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <?php include('includes/header.php'); ?>
@@ -78,7 +77,7 @@ $stmt->close();
             </div>
         </div>
 
-        <h2 class="mb-4">Available Shows</h2>
+        <h2 class="mb-4 text-light">Available Shows</h2>
         <?php if (empty($shows)): ?>
             <p>No shows available for this movie.</p>
         <?php else: ?>

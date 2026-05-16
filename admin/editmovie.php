@@ -37,6 +37,26 @@ if (isset($_POST['update'])) {
     $genres = mysqli_real_escape_string($con, $_POST['genres']);
     $release_date = mysqli_real_escape_string($con, $_POST['release_date']);
     $description = mysqli_real_escape_string($con, $_POST['description']);
+    $poster_url = mysqli_real_escape_string($con, trim($_POST['poster_url'] ?? ''));
+    // Handle new poster upload (optional)
+    if (!empty($_FILES['poster_file']) && $_FILES['poster_file']['error'] === UPLOAD_ERR_OK) {
+        $tmp = $_FILES['poster_file']['tmp_name'];
+        $info = getimagesize($tmp);
+        if ($info !== false) {
+            $ext = image_type_to_extension($info[2], false);
+            $safeName = time() . '_' . uniqid() . '.' . $ext;
+            $targetDir = __DIR__ . '/../img/posters/';
+            if (!is_dir($targetDir)) mkdir($targetDir, 0755, true);
+            $targetPath = $targetDir . $safeName;
+            if (move_uploaded_file($tmp, $targetPath)) {
+                // delete old poster file if present
+                if (!empty($movie['poster_url']) && file_exists(__DIR__ . '/../' . $movie['poster_url'])) {
+                    @unlink(__DIR__ . '/../' . $movie['poster_url']);
+                }
+                $poster_url = 'img/posters/' . $safeName;
+            }
+        }
+    }
 
     $update_query = "UPDATE movie SET 
         title = '$title',
@@ -45,7 +65,8 @@ if (isset($_POST['update'])) {
         rating = '$rating',
         genres = '$genres',
         release_date = '$release_date',
-        description = '$description'
+        description = '$description',
+        poster_url = '$poster_url'
         WHERE movie_id = $id";
 
     if (mysqli_query($con, $update_query)) {
@@ -192,6 +213,12 @@ if (isset($_POST['update'])) {
                                     <div class="form-group col-12">
                                         <label for="description">Description</label>
                                         <textarea id="description" class="form-control" placeholder="Movie description" name="description" rows="4"><?php echo htmlspecialchars($movie['description']); ?></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-12">
+                                        <label for="poster_url">Poster URL</label>
+                                        <input id="poster_url" class="form-control" type="text" name="poster_url" value="<?php echo htmlspecialchars($movie['poster_url']); ?>">
                                     </div>
                                 </div>
                                 <button type="submit" value="update" name="update" class="btn btn-primary btn-block">Update Movie</button>

@@ -23,9 +23,8 @@ if (isset($_POST['but_logout'])) {
     <link rel="icon" type="image/png" href="../img/logo.png">
     <link rel="stylesheet" href="../style/styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Bootstrap 4 removed; admin pages use admin-level Bootstrap 5 -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
         .movie-form-card {
             max-width: 1100px;
@@ -144,7 +143,7 @@ if (isset($_POST['but_logout'])) {
                     <div class="card shadow-sm mb-4 movie-form-card">
                         <div class="card-body">
                             <h4 class="card-title mb-4">Add New Movie</h4>
-                            <form action="" method="POST" class="movie-form">
+                            <form action="" method="POST" class="movie-form" enctype="multipart/form-data">
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="movieTitle">Title</label>
@@ -175,8 +174,8 @@ if (isset($_POST['but_logout'])) {
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-12">
-                                        <label for="posterUrl">Poster URL</label>
-                                        <input id="posterUrl" class="form-control" placeholder="img/movie-poster-1.jpg" type="text" name="poster_url">
+                                        <label for="posterFile">Poster Image</label>
+                                        <input id="posterFile" class="form-control" type="file" name="poster_file" accept="image/*">
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -197,7 +196,22 @@ if (isset($_POST['but_logout'])) {
                         $rating = mysqli_real_escape_string($con, $_POST['rating']);
                         $genres = mysqli_real_escape_string($con, $_POST['genres']);
                         $release_date = mysqli_real_escape_string($con, $_POST['release_date']);
-                        $poster_url = mysqli_real_escape_string($con, trim($_POST['poster_url'] ?? ''));
+                        // Handle poster upload
+                        $poster_url = '';
+                        if (!empty($_FILES['poster_file']) && $_FILES['poster_file']['error'] === UPLOAD_ERR_OK) {
+                            $tmp = $_FILES['poster_file']['tmp_name'];
+                            $info = getimagesize($tmp);
+                            if ($info !== false) {
+                                $ext = image_type_to_extension($info[2], false);
+                                $safeName = time() . '_' . uniqid() . '.' . $ext;
+                                $targetDir = __DIR__ . '/../img/posters/';
+                                if (!is_dir($targetDir)) mkdir($targetDir, 0755, true);
+                                $targetPath = $targetDir . $safeName;
+                                if (move_uploaded_file($tmp, $targetPath)) {
+                                    $poster_url = 'img/posters/' . $safeName;
+                                }
+                            }
+                        }
                         $description = mysqli_real_escape_string($con, trim($_POST['description'] ?? ''));
 
                         $insert_query = "INSERT INTO movie (title, duration_min, language, rating, genres, poster_url, release_date, description)

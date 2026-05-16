@@ -55,10 +55,10 @@ try {
     $payment_id = $con->insert_id;
     $stmt->close();
 
-    // Insert tickets
-    $stmt = $con->prepare("INSERT INTO ticket (qr_code, booking_id, seat_id) VALUES (?, ?, ?)");
+    // Insert provisional tickets as reservations (qr_code prefixed with RESV, not yet confirmed)
+    $stmt = $con->prepare("INSERT INTO ticket (qr_code, booking_id, seat_id, is_confirmed) VALUES (?, ?, ?, 0)");
     foreach ($selected_seats as $seat) {
-        $qr_code = uniqid('QR', true);
+        $qr_code = 'RESV' . uniqid();
         $stmt->bind_param("sii", $qr_code, $booking_id, $seat['id']);
         $stmt->execute();
     }

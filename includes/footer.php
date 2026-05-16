@@ -1,26 +1,26 @@
-<div class="footer-section footer-section1">
-<div class="footer-brand">
-    <a href="index.php">
-        <h1 class="footer-heading">ARVR Cinema</h1>
-    </a> 
-</div>    
-</div>
-<div class="footer-section footer-section2">
-    <h2><i class="fas fa-user-alt"></i> Social Media</h2>
-    <div class="footer-section-inner-container">
-        <span><i class="fab fa-lg fa-facebook-square"></i> Facebook</span>
-        <span><i class="fab fa-lg fa-twitter-square"></i> Twitter</span>
-        <span><i class="fab fa-lg fa-instagram"></i> Instagram</span>
-    </div>
-</div>
-<div class="footer-section  footer-section3">
-    <p>© 2020 ARVR Movies. Created by Query Coder's. </p>
-    <a>Advertising</a>
-    <a>Privacy Policy</a>
-    <a href="contact-us.php">Contact</a>
-</div>
+<footer class="footer" style="margin-top: 50px;">
+    <div class="footer-container">
 
-<!-- <footer class="bg-dark d-flex justify-content-center">
-    <h2 class="text-white" href="#">COVID-19 LIVE STATS</h2>
-    <h2 style="color:#fff;">Developed By <a target="_blank" class="navbar-brand line text-white" href="https://github.com/aman05382/">Aman Sharma</a></h2>
-</footer> -->
+        <div class="footer-brand">
+            <h2>Movie Ticket Booking</h2>
+            <p>Book your favorite movies anytime, anywhere.</p>
+        </div>
+
+        <div class="footer-links">
+            <a href="#">Advertising</a>
+            <a href="#">Privacy Policy</a>
+            <a href="contact-us.php">Contact</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 Movie Ticket Booking. Created by Faiqa Malik.</p>
+    </div>
+</footer>
+<!-- Bootstrap JS bundle (required for collapse, dropdowns) -->
+<?php
+// Load Bootstrap JS only for admin pages
+if (strpos($_SERVER['REQUEST_URI'], '/admin/') !== false) : ?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<?php endif; ?>

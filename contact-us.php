@@ -16,17 +16,17 @@
     <?php
     include "connection.php";
     ?>
-    <header></header>
+    <?php include('includes/header.php'); ?>
     <div class="contact-us-container">
         <div class="contact-us-section contact-us-section1">
-            <h1>Contact</h1>
+            <h1 class="text-light">Contact</h1>
             <p>Feel Free to Contact Us </p>
             <form action="" method="POST">
-                <input placeholder="First Name" name="fName" required><br>
-                <input placeholder="Last Name" name="lName"><br>
-                <input placeholder="E-mail Address" name="eMail" required><br>
-                <textarea placeholder="Enter your message !" name="feedback" rows="10" cols="30" required></textarea><br>
-                <button type="submit" name="submit" value="submit">Send your Message</button>
+                <input class="form-control mb-2" placeholder="First Name" name="fName" required>
+                <input class="form-control mb-2" placeholder="Last Name" name="lName">
+                <input class="form-control mb-2" placeholder="E-mail Address" name="eMail" required>
+                <textarea class="form-control mb-2" placeholder="Enter your message !" name="feedback" rows="6" required></textarea>
+                <button type="submit" name="submit" value="submit" class="btn btn-outline-primary text-dark">Send your Message</button>
                 <?php
                 if (isset($_POST['submit'])) {
                     $insert_query = "INSERT INTO 
@@ -49,8 +49,8 @@
 
         </div>
         <div class="contact-us-section contact-us-section2">
-            <h1>Address & Info</h1>
-            <h3>Phone Numbers</h3>
+            <h1 class="text-light">Address & Info</h1>
+            <h3 class="text-light">Phone Numbers</h3>
             <p><a href="tel:01011391148">+2 010 11 39 11 48</a><br>
                 <a href="tel:01011391148">+2 010 11 39 11 48</a></p>
             <h3>Address</h3>

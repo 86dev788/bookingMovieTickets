@@ -177,6 +177,10 @@ CREATE TABLE ticket (
 
     is_used BOOLEAN DEFAULT FALSE,
 
+    -- whether the ticket is finalized after successful payment
+    is_confirmed BOOLEAN DEFAULT FALSE,
+    confirmed_at DATETIME,
+
     generated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     booking_id INT NOT NULL,

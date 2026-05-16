@@ -6,8 +6,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<!-- Bootstrap is loaded globally in includes/header.php -->
 
 	<title>Recipt</title>
 	<style>
@@ -124,7 +123,7 @@
 			color: #fff;
 			font-size: 1em;
 			font-family: "Lobster", cursive;
-			text-shadow: 2px 2px 0px #6e5a11, 4px 4px 0px #836d24, 6px 6px 0px #a88616,
+			text-shadow: 2px 2px 0px #2ba0ff, 4px 4px 0px #836d24, 6px 6px 0px #a88616,
 				8px 8px 0px #b08909, 10px 10px 0px #ab995e;
 		}
 	</style>
@@ -134,6 +133,7 @@
 <body>
 
 	<div>
+		<?php include('includes/header.php'); ?>
 		<?php
 include "connection.php";
 $db = mysqli_select_db($con, "cinema_db");
@@ -174,7 +174,7 @@ $db = mysqli_select_db($con, "cinema_db");
 						<tr>
 							<td class="title">
 								<div class="footer-brand">
-									<h1 class="footer-heading">ARVR Cinema</h1>
+									<h1 class="footer-heading">Movie Ticket Booking</h1>
 								</div>
 							</td>
 							<td>
@@ -193,7 +193,7 @@ $db = mysqli_select_db($con, "cinema_db");
 					<table>
 						<tr>
 							<td>
-								ARVR Cinema<br>
+								Movie Ticket Booking<br>
 								393 , Kohat Enclave<br>
 								Delhi-110088
 							</td>
@@ -305,7 +305,7 @@ $db = mysqli_select_db($con, "cinema_db");
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	<!-- Bootstrap JS removed (loaded globally if needed) -->
 </body>
 
 </html>

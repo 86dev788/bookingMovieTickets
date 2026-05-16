@@ -82,31 +82,41 @@ ksort($seat_map);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seat Selection - <?php echo htmlspecialchars($show['Title']); ?></title>
     <link rel="stylesheet" href="style/styles.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        .seat-map { display: flex; flex-direction: column; align-items: center; }
-        .seat-row { display: flex; margin: 5px 0; }
-        .seat { width: 30px; height: 30px; margin: 2px; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; cursor: pointer; }
-        .seat.available { background-color: #28a745; color: white; }
-        .seat.booked { background-color: #dc3545; color: white; cursor: not-allowed; }
-        .seat.vip { background-color: #ffc107; }
-        .seat.selected { background-color: #007bff; }
-        .screen { width: 100%; height: 20px; background-color: #333; color: white; text-align: center; margin-bottom: 20px; }
+        .seat-map { display: flex; flex-direction: column; gap: 8px; max-width: 900px; margin: 0 auto; }
+        .seat-row { display: flex; align-items: center; }
+        .seat-row-label { width: 48px; text-align: center; font-weight: 700; color: #333; margin-right: 12px; }
+        .seat-row .seat { width: 48px; height: 48px; margin: 4px; border-radius: 8px; border: 1px solid #d1d7e0; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: 600; transition: transform .08s, box-shadow .08s; }
+        .seat-row .seat:hover { transform: translateY(-4px); box-shadow: 0 6px 18px rgba(31,42,72,0.12); }
+        .seat.available { background-color: #e9f7ef; color: #186a3b; }
+        .seat.booked { background-color: #f1f3f5; color: #9aa3ad; cursor: not-allowed; text-decoration: line-through; }
+        .seat.vip { background: linear-gradient(135deg,#ffebcc,#ffd27a); color: #6a3f00; }
+        .seat.selected { background-color: #2f6fff; color: #fff; box-shadow: 0 8px 22px rgba(47,111,255,0.2); }
+        .seat.empty { width: 48px; height: 48px; margin: 4px; background: transparent; border: none; }
+        .screen { width: 100%; height: 18px; background-color: #333; color: white; text-align: center; margin: 18px 0; border-radius: 4px; }
+        .seat-legend .legend-item { display:flex; align-items:center; gap:8px; margin-right: 12px; }
+        .legend-item .seat { width: 22px; height: 22px; margin:0; }
+        @media (max-width: 768px) {
+            .seat-row-label { width: 36px; margin-right: 8px; }
+            .seat-row .seat { width: 38px; height: 38px; }
+        }
     </style>
 </head>
 <body>
     <?php include('includes/header.php'); ?>
 
     <div class="container mt-5">
-        <h1>Seat Selection</h1>
-        <p><strong>Movie:</strong> <?php echo htmlspecialchars($show['Title']); ?></p>
-        <p><strong>Cinema:</strong> <?php echo htmlspecialchars($show['CinemaName']); ?> (<?php echo htmlspecialchars($show['City']); ?>)</p>
-        <p><strong>Screen:</strong> <?php echo htmlspecialchars($show['ScreenName']); ?></p>
-        <p><strong>Show Time:</strong> <?php echo date('d M Y, H:i', strtotime($show['ShowTime'])); ?></p>
-        <p><strong>Price per Seat:</strong> PKR <?php echo number_format($show['Price'], 2); ?></p>
+      <div class="row">
+        <div class="col-md-4">
+              <h1 class="text-light">Seat Selection</h1>
+        <p class="text-light"><strong>Movie:</strong> <?php echo htmlspecialchars($show['Title']); ?></p>
+        <p class="text-light"><strong>Cinema:</strong> <?php echo htmlspecialchars($show['CinemaName']); ?> (<?php echo htmlspecialchars($show['City']); ?>)</p>
+        <p class="text-light"><strong>Screen:</strong> <?php echo htmlspecialchars($show['ScreenName']); ?></p>
+        <p class="text-light"><strong>Show Time:</strong> <?php echo date('d M Y, H:i', strtotime($show['ShowTime'])); ?></p>
+        <p class="text-light"><strong>Price per Seat:</strong> PKR <?php echo number_format($show['Price'], 2); ?></p>
 
-        <div class="screen">SCREEN</div>
-
+        </div>
+        <div class="col-md-8">
         <div class="seat-legend mb-4 d-flex flex-wrap gap-3">
             <div class="legend-item"><span class="seat available"></span> Available</div>
             <div class="legend-item"><span class="seat vip"></span> VIP</div>
@@ -119,32 +129,42 @@ ksort($seat_map);
             <input type="hidden" name="selected_seats" id="selected-seats-input">
             <div class="seat-map">
                 <?php foreach ($seat_map as $row => $seats): ?>
-                    <div class="seat-row align-items-center">
-                        <div class="seat-row-label mr-3"><?php echo $row; ?></div>
-                        <?php for ($col = 1; $col <= max(array_keys($seats)); $col++): ?>
+                    <?php $maxCol = max(array_keys($seats)); ?>
+                    <div class="seat-row ">
+                        <div class="seat-row-label text-light"><?php echo $row; ?></div>
+                        <div class="seat-row-seats" style="display:flex;flex-wrap:wrap;">
+                        <?php for ($col = 1; $col <= $maxCol; $col++): ?>
                             <?php if (isset($seats[$col])): ?>
                                 <?php $seat = $seats[$col]; ?>
-                                <div class="seat <?php echo in_array($seat['SeatID'], $booked_seats) ? 'booked' : 'available'; ?> <?php echo $seat['SeatType'] == 'VIP' ? 'vip' : ''; ?>"
+                                <?php $isBooked = in_array($seat['SeatID'], $booked_seats); ?>
+                                <div class="seat <?php echo $isBooked ? 'booked' : 'available'; ?> <?php echo $seat['SeatType'] == 'VIP' ? 'vip' : ''; ?>"
+                                     title="<?php echo htmlspecialchars($seat['SeatNumber'] . ' - ' . $seat['SeatType']); ?>"
                                      data-seat-id="<?php echo $seat['SeatID']; ?>"
                                      data-seat-number="<?php echo $seat['SeatNumber']; ?>"
                                      data-seat-type="<?php echo $seat['SeatType']; ?>">
                                     <?php echo htmlspecialchars($seat['SeatNumber']); ?>
                                 </div>
                             <?php else: ?>
-                                <div class="seat empty"></div>
+                                <div class="seat empty" aria-hidden="true"></div>
                             <?php endif; ?>
                         <?php endfor; ?>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>
 
             <div class="mt-4">
-                <h4>Selected Seats: <span id="selected-seats"></span></h4>
-                <p>Total Amount: PKR <span id="total-amount">0.00</span></p>
+                <h4 class="text-light">Selected Seats: <span id="selected-seats"></span></h4>
+                <p class="text-light">Total Amount: PKR <span id="total-amount">0.00</span></p>
                 <button type="submit" class="btn btn-primary" id="proceed-btn" disabled>Review Booking</button>
                 <a href="movie-details.php?id=<?php echo $show['MovieID']; ?>" class="btn btn-outline-secondary ml-2">Cancel</a>
             </div>
         </form>
+        </div>
+      </div>
+        <!-- <div class="screen">SCREEN</div> -->
+
+        <?php include('includes/footer.php'); ?>
     </div>
 
     <script>
@@ -171,6 +191,10 @@ ksort($seat_map);
 
                 updateSelection();
             });
+            // keyboard accessibility
+            seat.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); seat.click(); }
+            });
         });
 
         function updateSelection() {
@@ -181,6 +205,6 @@ ksort($seat_map);
         }
     </script>
 
-    <?php include('includes/footer.php'); ?>
+   
 </body>
 </html>
