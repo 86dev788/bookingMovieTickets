@@ -34,6 +34,24 @@ if (!$booking || $booking['Status'] !== 'Pending') {
     exit();
 }
 
+function finalizeBookingTickets($con, $booking_id) {
+    $tstmt = $con->prepare("SELECT ticket_id, seat_id FROM ticket WHERE booking_id = ?");
+    $tstmt->bind_param("i", $booking_id);
+    $tstmt->execute();
+    $tres = $tstmt->get_result();
+    $tstmt->close();
+
+    if ($tres) {
+        $ustmt = $con->prepare("UPDATE ticket SET qr_code = ?, is_confirmed = 1, confirmed_at = NOW(), generated_at = NOW() WHERE ticket_id = ?");
+        while ($trow = $tres->fetch_assoc()) {
+            $final_qr = 'TK' . $booking_id . '_' . $trow['seat_id'] . '_' . uniqid();
+            $ustmt->bind_param("si", $final_qr, $trow['ticket_id']);
+            $ustmt->execute();
+        }
+        $ustmt->close();
+    }
+}
+
 $simulate_needed = false;
 $selected_method = '';
 
@@ -117,6 +135,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param("i", $booking_id);
         $stmt->execute();
         $stmt->close();
+
+        finalizeBookingTickets($con, $booking_id);
 
         // Prepare flash message and redirect to confirmation after showing it
         $show_flash = true;

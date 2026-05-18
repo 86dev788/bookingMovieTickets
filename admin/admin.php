@@ -23,14 +23,39 @@ if (!isset($_SESSION['uname'])) {
 </head>
 
 <body>
-    <?php
-    $bookingsNo = mysqli_num_rows(mysqli_query($con, "SELECT * FROM booking"));
-    $ticketsNo = mysqli_num_rows(mysqli_query($con, "SELECT * FROM ticket"));
-    $paidPaymentsNo = mysqli_num_rows(mysqli_query($con, "SELECT * FROM payment WHERE status = 'Success'"));
-    $moviesNo = mysqli_num_rows(mysqli_query($con, "SELECT * FROM movie"));
-    $messagesNo = mysqli_num_rows(mysqli_query($con, "SELECT * FROM feedbacktable"));
-    $userNo = mysqli_num_rows(mysqli_query($con, "SELECT * FROM users"));
-    ?>
+  <?php
+
+// Total bookings
+$bookingsNo = mysqli_fetch_assoc(mysqli_query($con, "
+    SELECT COUNT(*) as total FROM booking
+"))['total'];
+
+// Total movies
+$moviesNo = mysqli_fetch_assoc(mysqli_query($con, "
+    SELECT COUNT(*) as total FROM movie
+"))['total'];
+
+// Tickets sold (only valid tickets)
+$ticketsNo = mysqli_fetch_assoc(mysqli_query($con, "
+    SELECT COUNT(*) as total FROM ticket
+"))['total'];
+
+// Paid payments
+$paidPaymentsNo = mysqli_fetch_assoc(mysqli_query($con, "
+    SELECT COUNT(*) as total FROM payment WHERE status = 'Success'
+"))['total'];
+
+// Total users
+$userNo = mysqli_fetch_assoc(mysqli_query($con, "
+    SELECT COUNT(*) as total FROM customer
+"))['total'];  
+
+// Messages
+$messagesNo = mysqli_fetch_assoc(mysqli_query($con, "
+    SELECT COUNT(*) as total FROM feedbacktable
+"))['total'];
+
+?>
 
     <?php include('header.php'); ?>
 
@@ -73,50 +98,67 @@ if (!isset($_SESSION['uname'])) {
                     </div>
                 </div>
                 <div class="admin-section-panel admin-section-panel1">
-                    <div class="admin-panel-section-header">
-                        <h2>Recent Live Bookings</h2>
-                        <i class="fas fa-ticket-alt" style="background-color: #cf4545"></i>
+                    <div class="admin-panel-section-header d-flex justify-content-between align-items-center">
+                        <div>
+                            <h2>Recent Live Bookings</h2>
+                        </div>
+                        <div>
+                            <a href="view.php" class="btn btn-sm btn-primary">Open Booking Management</a>
+                        </div>
                     </div>
                     <div class="admin-panel-section-content">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <tr>
                                 <th>Booking ID</th>
                                 <th>Customer ID</th>
+                                <th>Seats</th>
                                 <th>Movie</th>
                                 <th>Show Time</th>
-                                <th>Status</th>
                                 <th>Total</th>
                                 <th>Payment</th>
                             </tr>
                             <tbody>
                                 <?php
+                                        $select = "SELECT 
+                                                b.booking_id,
+                                                b.customer_id,
+                                                m.title AS movie_title,
+                                                s.show_time,
+                                                b.status,
+                                                b.total_amount,
+                                                p.status AS payment_status,
+                                                GROUP_CONCAT(se.seat_number SEPARATOR ', ') AS seats
+                                            FROM booking b
+                                            
+                                            LEFT JOIN movie_show s ON b.show_id = s.show_id
+                                            LEFT JOIN movie m ON s.movie_id = m.movie_id
+                                            LEFT JOIN payment p ON p.booking_id = b.booking_id
+                                            
+                                            LEFT JOIN ticket t ON t.booking_id = b.booking_id
+                                            LEFT JOIN seat se ON se.seat_id = t.seat_id
+                                            
+                                            GROUP BY b.booking_id
+                                            ORDER BY b.booking_date DESC
+                                            LIMIT 20";
+                                            $run = mysqli_query($con, $select);
+                                            while ($row = mysqli_fetch_assoc($run)) {
+                                                $bookingid = $row['booking_id'];
+                                                $customerID = $row['customer_id'];
+                                                $movieTitle = $row['movie_title'];
+                                                $showTime = $row['show_time'];
+                                                $total = $row['total_amount'];
+                                                $paymentStatus = $row['payment_status'] ?? 'Pending';
 
-                                $select = "SELECT b.booking_id, b.customer_id, m.title AS movie_title, s.show_time, b.status, b.total_amount, p.status AS payment_status
-                                           FROM booking b
-                                           LEFT JOIN movie_show s ON b.show_id = s.show_id
-                                           LEFT JOIN movie m ON s.movie_id = m.movie_id
-                                           LEFT JOIN payment p ON p.booking_id = b.booking_id
-                                           ORDER BY b.booking_date DESC
-                                           LIMIT 10";
-                                $run = mysqli_query($con, $select);
-                                while ($row = mysqli_fetch_assoc($run)) {
-                                    $bookingid = $row['booking_id'];
-                                    $customerID = $row['customer_id'];
-                                    $movieTitle = $row['movie_title'];
-                                    $showTime = $row['show_time'];
-                                    $status = $row['status'];
-                                    $total = $row['total_amount'];
-                                    $paymentStatus = $row['payment_status'] ?? 'Pending';
-                                ?>
-                                    <tr align="center">
-                                        <td><?php echo $bookingid; ?></td>
-                                        <td><?php echo $customerID; ?></td>
-                                        <td><?php echo htmlspecialchars($movieTitle); ?></td>
-                                        <td><?php echo htmlspecialchars($showTime); ?></td>
-                                        <td><?php echo htmlspecialchars($status); ?></td>
-                                        <td><?php echo htmlspecialchars($total); ?></td>
-                                        <td><?php echo htmlspecialchars($paymentStatus); ?></td>
-                                    </tr>
+                                            ?>
+                                                <tr align="center">
+                                                    <td><?php echo $bookingid; ?></td>
+                                                    <td><?php echo $customerID; ?></td>
+                                                    <td><?php echo htmlspecialchars($row['seats'] ?? 'N/A'); ?></td>
+                                                    <td><?php echo htmlspecialchars($movieTitle); ?></td>
+                                                    <td><?php echo htmlspecialchars($showTime); ?></td>
+                                                    <td><?php echo htmlspecialchars($total); ?></td>
+                                                    <td><?php echo htmlspecialchars($paymentStatus); ?></td>
+                                                </tr>
 
                                 <?php }
                                 ?>

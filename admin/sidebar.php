@@ -19,7 +19,7 @@ function submenuShow(array $names) { global $cur_page; foreach ($names as $n) if
                 </li>
                 <li>
                     <a href="view.php" class="nav-link px-0 align-middle text-white <?php echo isActive('view.php'); ?>">
-                        <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Bookings</span></a>
+                        <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Manage Booking</span></a>
                 </li>
                 <li>
                     <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white <?php echo submenuShow(['addmovie.php','showmovie.php','add-show.php','show-schedule.php']); ?>">
@@ -57,6 +57,14 @@ function submenuShow(array $names) { global $cur_page; foreach ($names as $n) if
                 <li>
                     <a href="contactus.php" class="nav-link px-0 align-middle text-white <?php echo isActive('contactus.php'); ?>">
                         <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
+                </li>
+                <li>
+                    <a href="reports.php" class="nav-link px-0 align-middle text-white <?php echo isActive('reports.php'); ?>">
+                        <i class="fs-4 bi-bar-chart"></i> <span class="ms-1 d-none d-sm-inline">Revenue Reports</span></a>
+                </li>
+                <li>
+                    <a href="scan-tickets.php" class="nav-link px-0 align-middle text-white <?php echo isActive('scan-tickets.php'); ?>">
+                        <i class="fs-4 bi-qrcode"></i> <span class="ms-1 d-none d-sm-inline">Scan Tickets</span></a>
                 </li>
             </ul>
             <hr class="text-secondary w-100">

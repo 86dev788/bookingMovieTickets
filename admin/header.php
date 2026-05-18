@@ -45,6 +45,6 @@ echo "<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstr
         <form method='post' action="">
             <input type="submit" value="Logout" class="btn btn-outline-warning" name="but_logout">
         </form>
-        <img class="admin-user-avatar" src="../img/avatar.png" alt="">
+        <!-- <img class="admin-user-avatar" src="../img/avatar.png" alt=""> -->
     </div>
 </div>

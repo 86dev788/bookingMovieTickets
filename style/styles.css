@@ -1190,6 +1190,47 @@ RESPONSIVE
 .admin-container {
   display: grid;
   grid-template-columns: 1fr 5fr;
+  min-width: 0;
+}
+
+.admin-container > * {
+  min-width: 0;
+}
+
+.admin-container .admin-section2,
+.admin-container .table-wrapper,
+.admin-container .table-responsive {
+  min-width: 0;
+}
+
+.admin-container .table-responsive {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.admin-container .table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.admin-container .table-responsive table {
+  min-width: max-content;
+  width: auto !important;
+  table-layout: auto;
+}
+
+.admin-container .table-responsive {
+  overflow-x: auto !important;
+}
+
+.admin-container table th,
+.admin-container table td {
+  white-space: nowrap;
+  overflow-wrap: normal;
 }
 
 .admin-section1 {

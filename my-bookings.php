@@ -16,7 +16,7 @@ $stmt = $con->prepare("SELECT b.booking_id AS BookingID, b.booking_date AS Booki
                        JOIN screen sc ON s.screen_id = sc.screen_id
                        JOIN cinema c ON sc.cinema_id = c.cinema_id
                        LEFT JOIN payment p ON p.booking_id = b.booking_id
-                       WHERE b.customer_id = ?
+                       WHERE b.customer_id = ? AND b.status NOT IN ('Cancelled', 'Refunded')
                        ORDER BY b.booking_date DESC");
 $stmt->bind_param("i", $customer_id);
 $stmt->execute();

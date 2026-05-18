@@ -28,7 +28,7 @@
                     <div class="table-title">
                         <div class="row">
                             <div class="col-sm-8">
-                                <h2>Customer <b>Messages</b></h2>
+                                <h2 class="text-light"><i class="fas fa-envelope"></i> Customer <b>Messages</b></h2>
                             </div>
                             <!--<div class="col-sm-4">
                                 <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button>
