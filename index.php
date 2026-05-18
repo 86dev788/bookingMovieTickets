@@ -1,3 +1,9 @@
+<?php
+include "connection.php";
+session_start(); // IMPORTANT (must be before header)
+$sql = "SELECT * FROM movie";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,15 +16,52 @@
     <title>Movie Ticket Booking</title>
     <link rel="icon" type="image/png" href="img/logo.png">
     <script src="_.js "></script>
+
 </head>
 
 <body>
-    <?php
-    include "connection.php";
-    $sql = "SELECT * FROM movie";
-    ?>
-    <header></header>
+    
+   
+        <?php include('includes/header.php'); ?>
+        <div id="movieCarousel" class="carousel slide" data-bs-ride="carousel">
 
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#movieCarousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#movieCarousel" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#movieCarousel" data-bs-slide-to="2"></button>
+    </div>
+
+    <!-- Slides -->
+    <div class="carousel-inner mb-5">
+
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+            <img src="img/slide1.jpg" class="d-block w-100" style="height: 400px" alt="Slide 1">
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+            <img src="img/slide2.AVIF" class="d-block w-100" style="height: 400px" alt="Slide 2">
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="carousel-item">
+            <img src="img/slide3.AVIF" class="d-block w-100" style="height: 400px" alt="Slide 3">
+        </div>
+
+    </div>
+
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#movieCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#movieCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+
+</div>
     <div class="container">
     <div id="home-section-1" class="movie-show-container">
         <h1>Currently Showing</h1>
@@ -142,7 +185,7 @@
 
 
     <footer></footer>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="scripts/jquery-3.3.1.min.js "></script>
     <script src="scripts/script.js "></script>
 </body>
