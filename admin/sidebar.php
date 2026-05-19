@@ -49,9 +49,9 @@ function submenuShow(array $names) { global $cur_page; foreach ($names as $n) if
                         <li>
                             <a href="screens.php" class="nav-link px-0 text-white <?php echo isActive('screens.php'); ?>"> <span class="d-none d-sm-inline">Manage Screens</span></a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="seats.php" class="nav-link px-0 text-white <?php echo isActive('seats.php'); ?>"> <span class="d-none d-sm-inline">Manage Seats</span></a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
                 <li>
