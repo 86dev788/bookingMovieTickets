@@ -27,6 +27,11 @@ Admin Login Details
 
 Username:- admin@booking.com
 Password:- admin123
+===================
+Client Login Details
+
+Username:- customer@gmail.com
+Password:- customer123
 ```
 
 ## Contributing
